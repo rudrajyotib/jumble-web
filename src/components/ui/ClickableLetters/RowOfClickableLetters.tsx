@@ -1,0 +1,21 @@
+import { wrap } from 'module'
+import ClickableLetter from './ClickableLetter'
+import RowOfLetterProps from './types/RowOfLettersProps'
+
+const RowOfClickableLetters = (props: RowOfLetterProps) => {
+
+
+
+    return (
+        <div
+            style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-evenly', margin: 10 }}
+        // className='d-flex flex-row mb-1 p-1 justify-content-evenly'
+        >
+            {
+                props.letters.map((letter, index) => <ClickableLetter key={`${props.idPrefix}${index}`} touchable={true} content={letter} clickHandler={props.letterClickHandler} />)
+            }
+        </div>
+    )
+};
+
+export default RowOfClickableLetters
