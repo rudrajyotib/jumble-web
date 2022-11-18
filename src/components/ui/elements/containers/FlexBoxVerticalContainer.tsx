@@ -10,9 +10,19 @@ const ContainerStyle = styled.div`
     flex-direction:column;
     display:flex;
 
+   
     @media (max-width:768px){
         width:100%;
     }
+    
+    @media only screen and (min-device-width: 769px) and (max-device-width: 1024px) and (orientation:portrait) {
+        width:90%;
+      }
+    
+      @media (min-width:1024px){
+        width:1024px;
+    }
+
 `
 
 const FlexBoxVerticalContainer = (props: any) => {
