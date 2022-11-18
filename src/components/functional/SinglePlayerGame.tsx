@@ -50,12 +50,10 @@ export class SinglePlayerGame extends React.Component<any, { gameState: 'newgame
 
         let content = <div />
 
-        const newGameBoard = <div style={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
-            <TimedSolutionPad successHandler={this.successHandler} timeOutHandler={this.timeOutHandler} key={this.wordOnBoard} durationInSeconds={300} targetWord={this.wordOnBoard} />
-        </div>
-
         if (this.state.gameState === 'activeboard') {
-            content = newGameBoard
+            content = <div style={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
+                <TimedSolutionPad successHandler={this.successHandler} timeOutHandler={this.timeOutHandler} key={this.wordOnBoard} durationInSeconds={60} targetWord={this.wordOnBoard} />
+            </div>
         } else if (this.state.gameState === 'timeout') {
             content = <TimeUp nextStepHandler={() => { this.setState({ gameState: 'nextboard' }) }} />
         } else if (this.state.gameState === 'success') {
