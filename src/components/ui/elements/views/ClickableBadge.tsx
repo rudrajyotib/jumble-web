@@ -23,6 +23,8 @@ const BadgeStyle = styled.div<ClickableBadgeProps>`
     cursor:${props => props.active === true ? "pointer" : "auto"};
    }
    margin:10px;
+   font-size: 30px;
+   font-weight:bold;
 
    @media (max-width:768px){
     width:40px;
