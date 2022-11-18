@@ -1,13 +1,11 @@
+import { JumbleLetter } from "../common/domain/JumbleLetter";
 import Letter from "../common/types/Letter";
 
 export function createLettersArrayWithPosition(input: string): Letter[] {
     const len = input.length;
     let result: Letter[] = [];
     for (let iter = 0; iter < len; iter++) {
-        result.push({
-            index: iter,
-            value: input.charAt(iter)
-        });
+        result.push(new JumbleLetter(iter, input.charAt(iter)))
     }
     return result;
 }
@@ -16,10 +14,7 @@ export function createArrayOfEmptyElements(input: string): Letter[] {
     const len = input.length;
     let result: Letter[] = [];
     for (let iter = 0; iter < len; iter++) {
-        result.push({
-            index: iter,
-            value: "_"
-        });
+        result.push(new JumbleLetter(iter))
     }
     return result;
 }

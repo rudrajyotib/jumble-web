@@ -3,7 +3,8 @@ import { ReactComponentElement } from "react"
 type Letter = {
     index: number,
     value: string,
-    clickHandler?: React.FunctionComponent
+    clickable: () => boolean
+    clear: () => void
 }
 
 export default Letter

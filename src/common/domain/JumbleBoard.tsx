@@ -18,12 +18,12 @@ export class JumbleBoard {
     }
 
     moveFromQuestionToAnswerFrame(index: number) {
-        if (this.questionFrame[index].value === '_') {
+        if (!this.questionFrame[index].clickable()) {
             return
         }
         this.lastAnswerPoint += 1
         this.answerFrame[this.lastAnswerPoint].value = this.questionFrame[index].value
-        this.questionFrame[index].value = '_'
+        this.questionFrame[index].clear()
         this.userInput.push(index)
     }
 
@@ -36,7 +36,7 @@ export class JumbleBoard {
         }
         let indexInQuestionFrame: number = this.userInput.pop() as number
         this.questionFrame[indexInQuestionFrame].value = this.answerFrame[this.lastAnswerPoint].value
-        this.answerFrame[this.lastAnswerPoint].value = '_'
+        this.answerFrame[this.lastAnswerPoint].clear()
         this.lastAnswerPoint = this.lastAnswerPoint - 1
     }
 
