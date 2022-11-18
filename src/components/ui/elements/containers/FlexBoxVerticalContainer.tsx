@@ -9,6 +9,7 @@ const ContainerStyle = styled.div`
     flex:1;
     flex-direction:column;
     display:flex;
+    background-color:beige;
 
    
     @media (max-width:768px){

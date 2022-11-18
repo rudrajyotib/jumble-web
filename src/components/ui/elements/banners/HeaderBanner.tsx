@@ -10,7 +10,8 @@ styles.set('instructionRibbon', `
     font-size : 30px;
 
     @media (max-width:768px){
-        font-size:1em;
+        font-size:0.9em;
+        font-weight:bold;
     }
 `)
 
