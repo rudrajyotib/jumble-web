@@ -9,7 +9,7 @@ export class JumbleLetter implements Letter {
     }
 
     clickable: () => boolean = () => {
-        if (this.value == '' || this.value.trim() == '' || this.value == '_') {
+        if (this.value === '' || this.value.trim() === '' || this.value === '_') {
             return false
         }
         return true

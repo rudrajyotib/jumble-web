@@ -41,7 +41,7 @@ export class JumbleBoard {
     }
 
     undoAll() {
-        while (this.lastAnswerPoint != -1) {
+        while (this.lastAnswerPoint !== -1) {
             this.undoLastAnswer()
         }
     }
