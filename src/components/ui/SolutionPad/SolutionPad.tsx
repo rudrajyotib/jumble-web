@@ -44,7 +44,7 @@ class SolutionPad extends React.Component<SolutionPadProps>{
                     <span>Click on the letters in correct sequence to unjumble</span>
                 </div>
                 <div style={{ flex: 3, display: 'flex', alignContent: 'center', justifyContent: 'center', flexDirection: 'column' }}>
-                    <RowsOfClickableLetters letters={this.jumbleBoard.questionFrame} idPrefx='question' rowSize={6} letterClickHandler={this.clickQuestionLetterHandler} />
+                    <RowsOfClickableLetters clickable={true} letters={this.jumbleBoard.questionFrame} idPrefx='question' rowSize={6} letterClickHandler={this.clickQuestionLetterHandler} />
                 </div>
                 <div style={{ flex: 1, alignItems: 'flex-start', display: 'flex', justifyContent: 'space-evenly', flexDirection: 'row' }}>
                     <div style={{ flex: 1, alignItems: 'flex-start', display: 'flex', justifyContent: 'space-evenly', flexDirection: 'row' }} >
@@ -62,7 +62,7 @@ class SolutionPad extends React.Component<SolutionPadProps>{
                 </div>
 
                 <div style={{ flex: 3, display: 'flex', alignContent: 'center', justifyContent: 'flex-start', flexDirection: 'column' }}>
-                    <RowsOfClickableLetters letters={this.jumbleBoard.answerFrame} idPrefx='answer' rowSize={6} letterClickHandler={(index: number) => { }} />
+                    <RowsOfClickableLetters clickable={false} letters={this.jumbleBoard.answerFrame} idPrefx='answer' rowSize={6} letterClickHandler={(index: number) => { }} />
                 </div>
             </div>
         )

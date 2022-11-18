@@ -1,6 +1,12 @@
 import styled from 'styled-components';
 
-const BadgeStyle = styled.div`
+type ClickableBadgeProps = {
+    text: string
+    clickHandler: () => void
+    active: boolean
+}
+
+const BadgeStyle = styled.div<ClickableBadgeProps>`
     width :90px;
     height : 50px;
     border-radius: 5px;
@@ -13,6 +19,9 @@ const BadgeStyle = styled.div`
    position : relative;
    justify-content:center;
    align-items;
+   :hover {
+    cursor:${props => props.active === true ? "pointer" : "auto"};
+   }
 
    @media (max-width:768px){
     width:50px;
@@ -21,14 +30,18 @@ const BadgeStyle = styled.div`
 
 `
 
-type ClickableBadgeProps = {
-    text: string
-    clickHandler: () => void
+const clickHandler = (props: ClickableBadgeProps) => {
+
+    if (props.active === false) {
+        return
+    }
+    props.clickHandler()
 }
+
 
 const ClickableBadge = (props: ClickableBadgeProps) => {
     return (
-        <BadgeStyle onClick={props.clickHandler}>
+        <BadgeStyle onClick={clickHandler.bind(this, props)} {...props}>
             <span style={{ margin: 'auto', textAlign: 'center' }}>{props.text}</span>
         </BadgeStyle>
     )

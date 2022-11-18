@@ -5,6 +5,7 @@ type RowsOfLettersProps = {
     idPrefx: string
     rowSize: number
     letterClickHandler: (index: number) => void
+    clickable: boolean
 }
 
 export default RowsOfLettersProps;
