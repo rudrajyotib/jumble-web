@@ -7,7 +7,15 @@ export interface WordService {
 
 class WordServiceImpl implements WordService {
     nextWord(): string {
-        return LocalRepo[Math.floor(Math.random() * LocalRepo.length)].toUpperCase()
+        let nextWordFound = false
+        let nextWord = ''
+        while (!nextWordFound) {
+            nextWord = LocalRepo[Math.floor(Math.random() * LocalRepo.length)].toUpperCase()
+            if (nextWord.trim() !== '' && nextWord.length > 5) {
+                nextWordFound = true
+            }
+        }
+        return nextWord
     }
 }
 
