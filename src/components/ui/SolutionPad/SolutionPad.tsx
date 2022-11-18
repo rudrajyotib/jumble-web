@@ -2,6 +2,7 @@ import React from "react";
 import { ReactNode } from "react";
 import { JumbleBoard } from "../../../common/domain/JumbleBoard";
 import RowsOfClickableLetters from "../ClickableLetters/RowsOfClickableLetters";
+import HeaderBanner from "../elements/banners/HeaderBanner";
 import Button from "../elements/buttons/Button";
 import SolutionPadProps from "./SolutionPadProps";
 
@@ -41,7 +42,7 @@ class SolutionPad extends React.Component<SolutionPadProps>{
         return (
             <div style={{ display: 'flex', flex: 1, flexDirection: 'column', height: '100%' }}>
                 <div style={{ flex: 1, display: 'flex', alignContent: 'center', justifyContent: 'flex-end', alignItems: 'center', flexDirection: 'column' }}>
-                    <span>Click on the letters in correct sequence to unjumble</span>
+                    <HeaderBanner banner="instructionRibbon" text="Click on the letters in correct sequence to unjumble" />
                 </div>
                 <div style={{ flex: 3, display: 'flex', alignContent: 'center', justifyContent: 'center', flexDirection: 'column' }}>
                     <RowsOfClickableLetters clickable={true} letters={this.jumbleBoard.questionFrame} idPrefx='question' rowSize={6} letterClickHandler={this.clickQuestionLetterHandler} />

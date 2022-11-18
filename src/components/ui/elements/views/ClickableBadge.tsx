@@ -22,10 +22,12 @@ const BadgeStyle = styled.div<ClickableBadgeProps>`
    :hover {
     cursor:${props => props.active === true ? "pointer" : "auto"};
    }
+   margin:10px;
 
    @media (max-width:768px){
-    width:50px;
+    width:40px;
     height:40px;
+    margin:5px;
 }
 
 `

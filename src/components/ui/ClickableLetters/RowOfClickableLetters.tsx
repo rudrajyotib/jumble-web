@@ -8,7 +8,7 @@ const RowOfClickableLetters = (props: RowOfLetterProps) => {
 
     return (
         <div
-            style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-evenly', margin: 10 }}
+            style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', margin: 10, flexDirection: 'row' }}
         // className='d-flex flex-row mb-1 p-1 justify-content-evenly'
         >
             {

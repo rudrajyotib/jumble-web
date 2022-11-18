@@ -1,4 +1,3 @@
-import Letter from "../common/types/Letter";
 
 export function sliceArray(inputArray: any[], chunkSize: number) {
     return inputArray.reduce((result, item, index) => {
@@ -6,4 +5,25 @@ export function sliceArray(inputArray: any[], chunkSize: number) {
         result[chunkIndex] = [].concat((result[chunkIndex] || []), item);
         return result
     }, [])
+}
+
+
+export function optimumRowSize(totalCells: number, cellPerRow: number): number {
+
+    if (totalCells % cellPerRow === 0) {
+        return cellPerRow;
+    }
+
+    if (totalCells / cellPerRow === 0) {
+        return cellPerRow
+    }
+
+    while (cellPerRow > 0) {
+        if ((totalCells % cellPerRow === 0) || (totalCells % cellPerRow > (cellPerRow / 2))) {
+            return cellPerRow
+        }
+        --cellPerRow
+    }
+
+    return 1;
 }

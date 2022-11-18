@@ -1,12 +1,12 @@
 
 import RowsOfLettersProps from './types/RowsOfLettersProps';
 import RowOfClickableLetters from './RowOfClickableLetters';
-import { sliceArray } from '../../../utils/GenericUtils';
+import { optimumRowSize, sliceArray } from '../../../utils/GenericUtils';
 import Letter from '../../../common/types/Letter';
 
 const RowsOfClickableLetters = (props: RowsOfLettersProps) => {
 
-    const rows: Letter[][] = sliceArray(props.letters, props.rowSize)
+    const rows: Letter[][] = sliceArray(props.letters, optimumRowSize(props.letters.length, props.rowSize))
 
     return (
         <div style={{
