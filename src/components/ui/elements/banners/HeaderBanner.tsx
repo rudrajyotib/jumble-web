@@ -9,10 +9,16 @@ const styles = new Map()
 styles.set('instructionRibbon', `
     font-size : 30px;
 
-    @media (max-width:768px){
-        font-size:0.9em;
+    @media (max-width:400px){
+        font-size:0.8em;
         font-weight:bold;
     }
+
+    @media only screen and (min-width: 401px) and (max-width: 768px)  {
+        font-size:0.9em;
+        font-weight:bold;
+      }
+    
 
     @media only screen and (min-width: 769px) and (max-width: 1024px)  {
         font-size:25px;
