@@ -26,11 +26,11 @@ const BadgeStyle = styled.div<ClickableBadgeProps>`
    font-size: 30px;
    font-weight:bold;
 
-   @media (max-width:768px){
+   @media (max-width:1024px){
     width:40px;
     height:40px;
     margin:5px;
-}
+    }
 
 `
 

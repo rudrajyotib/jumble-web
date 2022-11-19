@@ -13,6 +13,11 @@ styles.set('instructionRibbon', `
         font-size:0.9em;
         font-weight:bold;
     }
+
+    @media only screen and (min-width: 769px) and (max-width: 1024px)  {
+        font-size:25px;
+        font-weight:bold;
+      }
 `)
 
 
