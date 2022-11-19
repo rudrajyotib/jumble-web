@@ -5,16 +5,26 @@ class CountDownTimer extends React.Component<CountDownTimerProps, { timeUp: bool
 
     remainingDuration: number
     timeOut: NodeJS.Timeout
+    saveTimer: boolean
+    saveKeyword: string = 'default'
 
     constructor(props: CountDownTimerProps) {
         super(props)
         this.state = { timeUp: false }
         this.remainingDuration = props.duration
         this.timeOut = setTimeout(() => { }, 1000)
+        this.saveTimer = props.saveTimerProgressConfiguration.saveTimer
+        if (this.saveTimer) {
+            this.saveKeyword = props.saveTimerProgressConfiguration.saveKeyword && props.saveTimerProgressConfiguration.saveKeyword !== ''
+                ? props.saveTimerProgressConfiguration.saveKeyword : 'timeProgress'
+        }
     }
 
     componentDidMount(): void {
         clearTimeout(this.timeOut)
+        if (this.saveTimer) {
+            localStorage.setItem(this.saveKeyword, '' + this.remainingDuration)
+        }
         this.timeOut = setTimeout(() => {
             this.remainingDuration = this.remainingDuration - 1;
             this.setState({
@@ -31,6 +41,9 @@ class CountDownTimer extends React.Component<CountDownTimerProps, { timeUp: bool
 
     componentDidUpdate(prevProps: Readonly<CountDownTimerProps>, prevState: Readonly<{ timeUp: boolean }>, snapshot?: any): void {
         clearTimeout(this.timeOut)
+        if (this.saveTimer) {
+            localStorage.setItem(this.saveKeyword, '' + this.remainingDuration)
+        }
         if (this.remainingDuration <= 0) {
             if (this.state.timeUp === false) {
                 this.setState({

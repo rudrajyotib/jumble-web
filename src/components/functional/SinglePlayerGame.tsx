@@ -1,19 +1,20 @@
 import React from "react";
-import { JumbleBoard } from "../../common/domain/JumbleBoard";
+import { AppConstant, SinglePlayerBoardPersistableStates } from "../../common/AppConstants";
+import { SinglePlayerGameState } from "../../common/types/SinglePlayerGameState";
 import { WordService, WordServiceImpl } from "../../services/WordService";
 import { CorrectAnswer } from "../ui/Results/CorrectAnswer";
 import { Success } from "../ui/Results/Success";
 import { TimeUp } from "../ui/Results/TimeUp";
 import TimedSolutionPad from "../ui/TimedSolutionPad/TimedSolutionPad";
 
-export class SinglePlayerGame extends React.Component<any, { gameState: 'newgame' | 'nextboard' | 'activeboard' | 'timeout' | 'success' | 'showAnswer' }>{
+export class SinglePlayerGame extends React.Component<any, { gameState: SinglePlayerGameState }>{
 
 
     gameCurrentState: string
     wordOnBoard: string
-    // words: string[] = ['AAA']
     wordService: WordService
-    finishGameState: 'newgame' | 'nextboard' | 'activeboard' | 'timeout' | 'success' | 'showAnswer'
+    finishGameState: SinglePlayerGameState
+    timeRemaining = 60
 
     constructor(props: any) {
         super(props)
@@ -26,24 +27,42 @@ export class SinglePlayerGame extends React.Component<any, { gameState: 'newgame
 
     componentDidMount(): void {
         this.wordOnBoard = this.wordOnBoard = this.wordService.nextWord()
+        const locallySavedGameStatus = localStorage.getItem(AppConstant.SINGLE_PLAYER_GAME_STATE_STORE_KEY)
+        const locallySavedWordOnBoard = localStorage.getItem(AppConstant.SINGLE_PLAYER_LAST_WORD_STORE_KEY)
+        if (locallySavedGameStatus && locallySavedGameStatus === SinglePlayerBoardPersistableStates.on && locallySavedWordOnBoard && locallySavedWordOnBoard !== '') {
+            this.wordOnBoard = locallySavedWordOnBoard
+            const locallyPersistedTimeRemaining = localStorage.getItem(AppConstant.SINGLE_PLAYER_REMAINING_DURATION_STORE_KEY)
+            if (locallyPersistedTimeRemaining && locallyPersistedTimeRemaining !== '') {
+                this.timeRemaining = +locallyPersistedTimeRemaining
+            }
+        }
+        localStorage.setItem(AppConstant.SINGLE_PLAYER_GAME_STATE_STORE_KEY, SinglePlayerBoardPersistableStates.on)
+        localStorage.setItem(AppConstant.SINGLE_PLAYER_LAST_WORD_STORE_KEY, this.wordOnBoard)
         this.setState({ gameState: 'activeboard' })
     }
 
-    componentDidUpdate(prevProps: Readonly<any>, prevState: Readonly<{ gameState: 'newgame' | 'nextboard' | 'success' | 'activeboard' | 'timeout' | 'showAnswer' }>, snapshot?: any): void {
+    componentDidUpdate(prevProps: Readonly<any>, prevState: Readonly<{ gameState: SinglePlayerGameState }>, snapshot?: any): void {
         if (this.state.gameState === 'nextboard') {
             this.wordOnBoard = this.wordService.nextWord()
             this.setState({ gameState: 'activeboard' })
+            localStorage.setItem(AppConstant.SINGLE_PLAYER_GAME_STATE_STORE_KEY, SinglePlayerBoardPersistableStates.on)
+            localStorage.setItem(AppConstant.SINGLE_PLAYER_LAST_WORD_STORE_KEY, this.wordOnBoard)
+            this.timeRemaining = 60
         }
     }
 
     timeOutHandler = () => {
         this.finishGameState = 'timeout'
         this.setState({ gameState: 'showAnswer' })
+        localStorage.setItem(AppConstant.SINGLE_PLAYER_GAME_STATE_STORE_KEY, SinglePlayerBoardPersistableStates.over)
+        localStorage.removeItem(AppConstant.SINGLE_PLAYER_REMAINING_DURATION_STORE_KEY)
     }
 
     successHandler = () => {
         this.finishGameState = 'success'
         this.setState({ gameState: 'showAnswer' })
+        localStorage.setItem(AppConstant.SINGLE_PLAYER_GAME_STATE_STORE_KEY, SinglePlayerBoardPersistableStates.over)
+        localStorage.removeItem(AppConstant.SINGLE_PLAYER_REMAINING_DURATION_STORE_KEY)
     }
 
     render(): React.ReactNode {
@@ -52,7 +71,9 @@ export class SinglePlayerGame extends React.Component<any, { gameState: 'newgame
 
         if (this.state.gameState === 'activeboard') {
             content = <div style={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
-                <TimedSolutionPad successHandler={this.successHandler} timeOutHandler={this.timeOutHandler} key={this.wordOnBoard} durationInSeconds={60} targetWord={this.wordOnBoard} />
+                <TimedSolutionPad saveTimerProgressConfiguration={{
+                    saveTimer: true, saveKeyword: AppConstant.SINGLE_PLAYER_REMAINING_DURATION_STORE_KEY
+                }} successHandler={this.successHandler} timeOutHandler={this.timeOutHandler} key={this.wordOnBoard} durationInSeconds={this.timeRemaining} targetWord={this.wordOnBoard} />
             </div>
         } else if (this.state.gameState === 'timeout') {
             content = <TimeUp nextStepHandler={() => { this.setState({ gameState: 'nextboard' }) }} />

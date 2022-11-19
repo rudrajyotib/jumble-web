@@ -5,5 +5,9 @@ export type TimedSolutionPadProps = {
     targetWord: string
     timeOutHandler: () => void
     successHandler: () => void
+    saveTimerProgressConfiguration: {
+        saveTimer: boolean
+        saveKeyword?: string
+    }
 }
 

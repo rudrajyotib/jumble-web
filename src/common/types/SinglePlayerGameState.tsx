@@ -1,0 +1,1 @@
+export type SinglePlayerGameState = 'newgame' | 'nextboard' | 'activeboard' | 'timeout' | 'success' | 'showAnswer'
