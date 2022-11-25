@@ -41,13 +41,13 @@ class SolutionPad extends React.Component<SolutionPadProps>{
     render(): ReactNode {
         return (
             <div style={{ display: 'flex', flex: 1, flexDirection: 'column', height: '100%' }}>
-                <div style={{ flex: 1, display: 'flex', alignContent: 'center', justifyContent: 'flex-end', alignItems: 'center', flexDirection: 'column' }}>
-                    <HeaderBanner banner="instructionRibbon" text="Click on the letters in correct sequence to unjumble" />
+                <div style={{ flex: 1, display: 'flex', alignContent: 'center', justifyContent: 'center', alignItems: 'center', flexDirection: 'column', backgroundColor: '#c6fc03' }}>
+                    <HeaderBanner banner="instructionRibbon" text="Click the letters in sequence" />
                 </div>
-                <div style={{ flex: 3, display: 'flex', alignContent: 'center', justifyContent: 'center', flexDirection: 'column' }}>
+                <div style={{ flex: 2, display: 'flex', alignContent: 'center', justifyContent: 'center', flexDirection: 'column' }}>
                     <RowsOfClickableLetters clickable={true} letters={this.jumbleBoard.questionFrame} idPrefx='question' rowSize={6} letterClickHandler={this.clickQuestionLetterHandler} />
                 </div>
-                <div style={{ flex: 1, alignItems: 'flex-start', display: 'flex', justifyContent: 'space-evenly', flexDirection: 'row' }}>
+                <div style={{ flex: 1, alignItems: 'center', display: 'flex', justifyContent: 'space-evenly', flexDirection: 'row', backgroundColor: '#c6fc03' }}>
                     <div style={{ flex: 1, alignItems: 'flex-start', display: 'flex', justifyContent: 'space-evenly', flexDirection: 'row' }} >
                         <div>
 
