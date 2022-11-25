@@ -8,13 +8,13 @@ sizeMap.set('banner', `
     @media (min-width: 401px) and  (max-width:600px){
         width:400px;
        
-        height:400px;
+        height:300px;
     }
     
     @media (min-width: 601px){
-        width:600px;
+        width:450px;
        
-        height:600px;
+        height:350px;
     }
     `)
 

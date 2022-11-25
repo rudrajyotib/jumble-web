@@ -75,9 +75,13 @@ export class SinglePlayerGame extends React.Component<any, { gameState: SinglePl
                 }} successHandler={this.successHandler} timeOutHandler={this.timeOutHandler} key={this.wordOnBoard} durationInSeconds={this.timeRemaining} targetWord={this.wordOnBoard} />
             </div>
         } else if (this.state.gameState === 'timeout') {
-            content = <Result nextStepHandler={() => { this.setState({ gameState: 'nextboard' }) }} type="timeup" />
+            content = <div style={{ display: 'flex', flexDirection: 'column', flex: 1, justifyContent: 'center' }}>
+                <Result nextStepHandler={() => { this.setState({ gameState: 'nextboard' }) }} type="timeup" />
+            </div>
         } else if (this.state.gameState === 'success') {
-            content = <Result nextStepHandler={() => { this.setState({ gameState: 'nextboard' }) }} type="success" />
+            content = <div style={{ display: 'flex', flexDirection: 'column', flex: 1, justifyContent: 'center' }}>
+                <Result nextStepHandler={() => { this.setState({ gameState: 'nextboard' }) }} type="success" />
+            </div>
         } else if (this.state.gameState === 'showAnswer') {
             content = <CorrectAnswer displayDuration={2} answer={this.wordOnBoard} timeOutHandler={() => { this.setState({ gameState: this.finishGameState }) }} />
         }
