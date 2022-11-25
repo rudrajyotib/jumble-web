@@ -3,8 +3,7 @@ import { AppConstant, SinglePlayerBoardPersistableStates } from "../../common/Ap
 import { SinglePlayerGameState } from "../../common/types/SinglePlayerGameState";
 import { WordService, WordServiceImpl } from "../../services/WordService";
 import { CorrectAnswer } from "../ui/Results/CorrectAnswer";
-import { Success } from "../ui/Results/Success";
-import { TimeUp } from "../ui/Results/TimeUp";
+import Result from "../ui/Results/Result";
 import TimedSolutionPad from "../ui/TimedSolutionPad/TimedSolutionPad";
 
 export class SinglePlayerGame extends React.Component<any, { gameState: SinglePlayerGameState }>{
@@ -76,9 +75,9 @@ export class SinglePlayerGame extends React.Component<any, { gameState: SinglePl
                 }} successHandler={this.successHandler} timeOutHandler={this.timeOutHandler} key={this.wordOnBoard} durationInSeconds={this.timeRemaining} targetWord={this.wordOnBoard} />
             </div>
         } else if (this.state.gameState === 'timeout') {
-            content = <TimeUp nextStepHandler={() => { this.setState({ gameState: 'nextboard' }) }} />
+            content = <Result nextStepHandler={() => { this.setState({ gameState: 'nextboard' }) }} type="timeup" />
         } else if (this.state.gameState === 'success') {
-            content = <Success nextStepHandler={() => { this.setState({ gameState: 'nextboard' }) }} />
+            content = <Result nextStepHandler={() => { this.setState({ gameState: 'nextboard' }) }} type="success" />
         } else if (this.state.gameState === 'showAnswer') {
             content = <CorrectAnswer displayDuration={2} answer={this.wordOnBoard} timeOutHandler={() => { this.setState({ gameState: this.finishGameState }) }} />
         }
