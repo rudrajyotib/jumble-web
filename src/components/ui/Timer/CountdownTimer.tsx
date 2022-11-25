@@ -1,4 +1,5 @@
 import React from "react";
+import ClickableBadge from "../elements/views/ClickableBadge";
 import CountDownTimerProps from "./CountDownTimerProps";
 
 class CountDownTimer extends React.Component<CountDownTimerProps, { timeUp: boolean }> {
@@ -7,6 +8,8 @@ class CountDownTimer extends React.Component<CountDownTimerProps, { timeUp: bool
     timeOut: NodeJS.Timeout
     saveTimer: boolean
     saveKeyword: string = 'default'
+    minutesRemaining: number
+    secondsRemaining: number
 
     constructor(props: CountDownTimerProps) {
         super(props)
@@ -14,10 +17,18 @@ class CountDownTimer extends React.Component<CountDownTimerProps, { timeUp: bool
         this.remainingDuration = props.duration
         this.timeOut = setTimeout(() => { }, 1000)
         this.saveTimer = props.saveTimerProgressConfiguration.saveTimer
+        this.minutesRemaining = Math.floor(this.remainingDuration / 60)
+        this.secondsRemaining = this.remainingDuration % 60
         if (this.saveTimer) {
             this.saveKeyword = props.saveTimerProgressConfiguration.saveKeyword && props.saveTimerProgressConfiguration.saveKeyword !== ''
                 ? props.saveTimerProgressConfiguration.saveKeyword : 'timeProgress'
         }
+    }
+
+
+    calculateMinuteSeconds(): void {
+        this.minutesRemaining = Math.floor(this.remainingDuration / 60)
+        this.secondsRemaining = this.remainingDuration % 60
     }
 
     componentDidMount(): void {
@@ -27,6 +38,7 @@ class CountDownTimer extends React.Component<CountDownTimerProps, { timeUp: bool
         }
         this.timeOut = setTimeout(() => {
             this.remainingDuration = this.remainingDuration - 1;
+            this.calculateMinuteSeconds()
             this.setState({
                 timeUp: false
             })
@@ -55,6 +67,7 @@ class CountDownTimer extends React.Component<CountDownTimerProps, { timeUp: bool
         } else {
             this.timeOut = setTimeout(() => {
                 this.remainingDuration = this.remainingDuration - 1;
+                this.calculateMinuteSeconds()
                 this.setState({
                     timeUp: false
                 })
@@ -63,12 +76,20 @@ class CountDownTimer extends React.Component<CountDownTimerProps, { timeUp: bool
     }
 
     render(): React.ReactNode {
+
+
+
         return (
 
             <div style={{ display: 'flex', flex: 1, justifyContent: 'center', alignContent: 'center', alignItems: 'center' }}>
                 {this.state.timeUp === false ?
-                    <span>You have {this.remainingDuration} seconds</span>
-                    : <span>TIME IS UP !!!</span>
+                    <div style={{ display: 'flex', justifyContent: 'center', alignContent: 'center', alignItems: 'center' }}>
+                        <ClickableBadge active={false} clickHandler={() => { }} position={this.remainingDuration > 10 ? 'timer' : 'dyingseconds'} text={(this.minutesRemaining < 10 ? '0' + this.minutesRemaining : '' + this.minutesRemaining)} />
+                        <span>:</span>
+                        <ClickableBadge active={false} clickHandler={() => { }} position={this.remainingDuration > 10 ? 'timer' : 'dyingseconds'} text={(this.secondsRemaining < 10 ? '0' + this.secondsRemaining : '' + this.secondsRemaining)} />
+
+                    </div>
+                    : <div><span>TIME IS UP !!!</span></div>
                 }
             </div>
 
