@@ -35,8 +35,13 @@ export class CorrectAnswer extends React.Component<ShowCorrectAnswerProps, { vis
 
     render(): React.ReactNode {
         return (
-            <div style={{ display: 'flex', flexDirection: 'column', flex: 1, justifyContent: 'center', alignContent: 'center', alignItems: 'center' }}>
-                <RowsOfClickableLetters clickable={false} letterClickHandler={() => { }} letters={this.word} idPrefx='correctAnswer' rowSize={6} />
+            <div style={{
+                display: 'flex', flexDirection: 'column', flex: 1, justifyContent: 'center',
+                alignContent: 'center', alignItems: 'center'
+            }}>
+                <div style={{ display: 'flex', flexDirection: 'column', width: '100%', justifyContent: 'center', backgroundColor: '#c6fc03' }}>
+                    <RowsOfClickableLetters clickable={false} letterClickHandler={() => { }} letters={this.word} idPrefx='correctAnswer' rowSize={6} />
+                </div>
             </div>
         )
     }
