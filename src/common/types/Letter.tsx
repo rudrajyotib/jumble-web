@@ -5,6 +5,9 @@ type Letter = {
     value: string,
     clickable: () => boolean
     clear: () => void
+    markPositionallyCorrect: () => void
+    markPositionallyIncorrect: () => void
+    isPositionallyCorrect: () => boolean
 }
 
 export default Letter

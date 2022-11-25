@@ -16,7 +16,7 @@ const RowsOfClickableLetters = (props: RowsOfLettersProps) => {
 
             <div>
                 {
-                    rows.map((row, index) => <RowOfClickableLetters key={`${props.idPrefx}${index}`}
+                    rows.map((row, index) => <RowOfClickableLetters correctnessSensitive={props.correctnessSensitive} key={`${props.idPrefx}${index}`}
                         letters={row} idPrefix={`rowOfLetters${index}`} letterClickHandler={props.letterClickHandler}
                         clickable={props.clickable} />)
                 }

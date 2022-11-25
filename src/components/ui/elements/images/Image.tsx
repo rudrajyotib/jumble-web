@@ -9,9 +9,6 @@ const ImageStyle = styled.img<ImageProps>`
 
 class StyledImage extends React.Component<ImageProps>{
 
-    constructor(props: ImageProps) {
-        super(props)
-    }
 
 
     render(): ReactNode {

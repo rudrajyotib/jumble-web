@@ -40,7 +40,7 @@ export class CorrectAnswer extends React.Component<ShowCorrectAnswerProps, { vis
                 alignContent: 'center', alignItems: 'center'
             }}>
                 <div style={{ display: 'flex', flexDirection: 'column', width: '100%', justifyContent: 'center', backgroundColor: '#c6fc03' }}>
-                    <RowsOfClickableLetters clickable={false} letterClickHandler={() => { }} letters={this.word} idPrefx='correctAnswer' rowSize={6} />
+                    <RowsOfClickableLetters correctnessSensitive={false} clickable={false} letterClickHandler={() => { }} letters={this.word} idPrefx='correctAnswer' rowSize={6} />
                 </div>
             </div>
         )

@@ -5,6 +5,7 @@ type ClickableLetterProps = {
     content: Letter
     clickHandler: (index: number) => void
     clickable: boolean
+    correctnessSensitive: boolean
 }
 
 export default ClickableLetterProps;

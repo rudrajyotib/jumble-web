@@ -12,7 +12,7 @@ const RowOfClickableLetters = (props: RowOfLetterProps) => {
         // className='d-flex flex-row mb-1 p-1 justify-content-evenly'
         >
             {
-                props.letters.map((letter, index) => <ClickableLetter key={`${props.idPrefix}${index}`}
+                props.letters.map((letter, index) => <ClickableLetter correctnessSensitive={props.correctnessSensitive} key={`${props.idPrefix}${index}`}
                     touchable={true} content={letter} clickHandler={props.letterClickHandler} clickable={props.clickable} />)
             }
         </div>

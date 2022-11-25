@@ -4,6 +4,13 @@ type ClickableBadgeProps = {
     text: string
     clickHandler: () => void
     active: boolean
+    position: 'correct' | 'incorrect' | 'neutral'
+}
+
+const BackgroundColorMap = {
+    correct: 'green',
+    incorrect: 'red',
+    neutral: 'black'
 }
 
 const BadgeStyle = styled.div<ClickableBadgeProps>`
@@ -11,6 +18,7 @@ const BadgeStyle = styled.div<ClickableBadgeProps>`
     height : 50px;
     border-radius: 5px;
     background-color: white;
+    color: ${props => BackgroundColorMap[props.position]};
     border-color:blue;
     border-style:solid;
     border-width:1;

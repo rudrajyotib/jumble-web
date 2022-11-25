@@ -23,6 +23,11 @@ export class JumbleBoard {
         }
         this.lastAnswerPoint += 1
         this.answerFrame[this.lastAnswerPoint].value = this.questionFrame[index].value
+        if (this.targetWord[this.lastAnswerPoint] === this.answerFrame[this.lastAnswerPoint].value) {
+            this.answerFrame[this.lastAnswerPoint].markPositionallyCorrect()
+        } else {
+            this.answerFrame[this.lastAnswerPoint].markPositionallyIncorrect()
+        }
         this.questionFrame[index].clear()
         this.userInput.push(index)
     }

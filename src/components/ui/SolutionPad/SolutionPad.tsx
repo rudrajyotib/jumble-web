@@ -45,7 +45,7 @@ class SolutionPad extends React.Component<SolutionPadProps>{
                     <HeaderBanner banner="instructionRibbon" text="Click the letters in sequence" />
                 </div>
                 <div style={{ flex: 2, display: 'flex', alignContent: 'center', justifyContent: 'center', flexDirection: 'column' }}>
-                    <RowsOfClickableLetters clickable={true} letters={this.jumbleBoard.questionFrame} idPrefx='question' rowSize={6} letterClickHandler={this.clickQuestionLetterHandler} />
+                    <RowsOfClickableLetters correctnessSensitive={false} clickable={true} letters={this.jumbleBoard.questionFrame} idPrefx='question' rowSize={6} letterClickHandler={this.clickQuestionLetterHandler} />
                 </div>
                 <div style={{ flex: 1, alignItems: 'center', display: 'flex', justifyContent: 'space-evenly', flexDirection: 'row', backgroundColor: '#c6fc03' }}>
                     <div style={{ flex: 1, alignItems: 'flex-start', display: 'flex', justifyContent: 'space-evenly', flexDirection: 'row' }} >
@@ -63,7 +63,7 @@ class SolutionPad extends React.Component<SolutionPadProps>{
                 </div>
 
                 <div style={{ flex: 3, display: 'flex', alignContent: 'center', justifyContent: 'flex-start', flexDirection: 'column' }}>
-                    <RowsOfClickableLetters clickable={false} letters={this.jumbleBoard.answerFrame} idPrefx='answer' rowSize={6} letterClickHandler={(index: number) => { }} />
+                    <RowsOfClickableLetters correctnessSensitive={true} clickable={false} letters={this.jumbleBoard.answerFrame} idPrefx='answer' rowSize={6} letterClickHandler={(index: number) => { }} />
                 </div>
             </div>
         )
