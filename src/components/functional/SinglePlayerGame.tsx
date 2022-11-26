@@ -1,6 +1,7 @@
 import React from "react";
 import { AppConstant, SinglePlayerBoardPersistableStates } from "../../common/AppConstants";
 import { SinglePlayerGameState } from "../../common/types/SinglePlayerGameState";
+import { AppConfigurationContext, AppContext } from "../../config/AppConfiguration";
 import { WordService, WordServiceImpl } from "../../services/WordService";
 import { CorrectAnswer } from "../ui/Results/CorrectAnswer";
 import Result from "../ui/Results/Result";
@@ -13,7 +14,8 @@ export class SinglePlayerGame extends React.Component<any, { gameState: SinglePl
     wordOnBoard: string
     wordService: WordService
     finishGameState: SinglePlayerGameState
-    timeRemaining = 60
+    timeRemaining: number
+    configContext: AppContext
 
     constructor(props: any) {
         super(props)
@@ -22,6 +24,8 @@ export class SinglePlayerGame extends React.Component<any, { gameState: SinglePl
         this.wordOnBoard = ''
         this.wordService = new WordServiceImpl()
         this.finishGameState = 'newgame'
+        this.configContext = new AppConfigurationContext()
+        this.timeRemaining = this.configContext.getBoardDuration()
     }
 
     componentDidMount(): void {
@@ -46,7 +50,7 @@ export class SinglePlayerGame extends React.Component<any, { gameState: SinglePl
             this.setState({ gameState: 'activeboard' })
             localStorage.setItem(AppConstant.SINGLE_PLAYER_GAME_STATE_STORE_KEY, SinglePlayerBoardPersistableStates.on)
             localStorage.setItem(AppConstant.SINGLE_PLAYER_LAST_WORD_STORE_KEY, this.wordOnBoard)
-            this.timeRemaining = 60
+            this.timeRemaining = this.configContext.getBoardDuration()
         }
     }
 
